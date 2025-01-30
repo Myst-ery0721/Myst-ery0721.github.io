@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HusAI Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/husai.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" defer></script>
+</head>
+<body>
+    <!-- Top Navbar -->
+    <nav class="husai-navbar">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="/api/placeholder/40/40" alt="HusAI Logo" class="me-2">
+                <span class="fw-bold">HusAI</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <button class="husai-btn husai-btn-outline">
+                    <i class="fas fa-crown"></i> Upgrade
+                </button>
+                <button class="husai-btn husai-btn-warning">
+                    <i class="fas fa-gift"></i> Friends get 50% off
+                </button>
+                <button class="husai-btn husai-btn-outline">
+                    <i class="fas fa-comment-dots"></i> Feedback
+                </button>
+                <button class="husai-btn husai-btn-primary">
+                    <i class="fas fa-video"></i> Record Live Lecture
+                </button>
+                <button class="husai-btn husai-btn-primary">
+                    <i class="fas fa-plus"></i> Create a Set
+                </button>
+                <div class="theme-switch-wrapper">
+                    <button class="theme-switch" aria-label="Toggle theme"></button>
+                </div>
+                <div class="ms-3">
+                    <img src="/api/placeholder/40/40" alt="Profile" class="rounded-circle">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <nav class="husai-sidebar">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="husai-nav-link active" href="#">
+                    <i class="fas fa-home"></i>
+                    <span class="husai-nav-text">Home</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="husai-nav-link" href="#">
+                    <i class="fas fa-book"></i>
+                    <span class="husai-nav-text">My Library</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="husai-nav-link" href="#">
+                    <i class="fas fa-tasks"></i>
+                    <span class="husai-nav-text">Quizzes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="husai-nav-link" href="#">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="husai-nav-text">Progress</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="husai-main">
+        <div class="row">
+            <!-- Main Dashboard Area -->
+            <div class="col-md-8">
+                <h2 class="mb-4">Your Study Sets</h2>
+                
+                <!-- Tabs -->
+                <ul class="nav nav-tabs mb-4">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            <i class="fas fa-layer-group me-2"></i>Study Sets
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-folder me-2"></i>Materials
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Search Bar -->
+                <div class="husai-search-container">
+                    <input type="text" class="husai-input" placeholder="Search your study sets...">
+                    <div class="btn-group">
+                        <button class="husai-btn husai-btn-primary">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                        <button class="husai-btn husai-btn-outline">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                        <button class="husai-btn husai-btn-outline">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div class="text-center py-5">
+                    <i class="fas fa-books fa-4x mb-3 text-muted"></i>
+                    <h4>No study sets yet</h4>
+                    <p class="text-muted">Create your first study set to get started!</p>
+                    <button class="husai-btn husai-btn-primary">
+                        <i class="fas fa-plus"></i> Create a Set
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <div class="col-md-4">
+                <!-- Upcoming Events Card -->
+                <div class="husai-card mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">
+                            <i class="far fa-calendar me-2"></i>Upcoming Events
+                        </h5>
+                        <span class="badge bg-primary">New</span>
+                    </div>
+                    <div class="text-center py-4">
+                        <i class="far fa-calendar-alt fa-3x mb-3 text-muted"></i>
+                        <p class="text-muted">No upcoming events</p>
+                        <button class="husai-btn husai-btn-primary btn-sm">
+                            <i class="fas fa-calendar-plus"></i> View Calendar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Streak Card -->
+                <div class="husai-card bg-peach mb-4">
+                    <h5>
+                        <i class="fas fa-fire me-2"></i>Your Streak
+                    </h5>
+                    <div class="d-flex align-items-center mb-2">
+                        <h2 class="mb-0">0</h2>
+                        <i class="fas fa-fire ms-2 text-warning"></i>
+                    </div>
+                    <p class="text-muted">Keep your streak going by studying every day!</p>
+                    <button class="husai-btn husai-btn-outline btn-sm">
+                        <i class="fas fa-trophy"></i> View Leaderboard
+                    </button>
+                </div>
+
+                <!-- Daily Objectives -->
+                <div class="husai-card">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">
+                            <i class="fas fa-tasks me-2"></i>Daily Objectives
+                        </h5>
+                        <a href="#" class="text-decoration-none">View All</a>
+                    </div>
+                    <div class="objective-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star me-2 text-warning"></i>
+                                <span>Perfect Score on a Test</span>
+                            </div>
+                            <span>0/1</span>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle me-2 text-primary"></i>
+                                <span>Complete a Test</span>
+                            </div>
+                            <span>0/2</span>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-gamepad me-2 text-success"></i>
+                                <span>Perfect Score on a Match Game</span>
+                            </div>
+                            <span>0/1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

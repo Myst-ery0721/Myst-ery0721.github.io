@@ -1,0 +1,547 @@
+/* HusAI Main Styles - Playful Professional Theme
+   Version 2.3
+*/
+
+/* ==========================================================================
+   Design Tokens
+   ========================================================================== */
+   :root {
+    /* Brand Colors */
+    --husai-primary: #4964F5;
+    --husai-secondary: #6C63FF;
+    --husai-accent-purple: #8B5CF6;
+    --husai-accent-pink: #EC4899;
+    --husai-accent-blue: #60A5FA;
+    --husai-success: #34D399;
+    --husai-warning: #FBBF24;
+    --husai-danger: #EF4444;
+
+    /* Gradients */
+    --husai-gradient-primary: linear-gradient(135deg, #4964F5 0%, #8B5CF6 100%);
+    --husai-gradient-secondary: linear-gradient(135deg, #6C63FF 0%, #EC4899 100%);
+    --husai-gradient-success: linear-gradient(135deg, #34D399 0%, #3B82F6 100%);
+
+    /* Background Colors */
+    --husai-bg-primary: #F3F2FF;
+    --husai-bg-secondary: #FFFFFF;
+    --husai-bg-success: #ECFDF5;
+    --husai-bg-warning: #FEF3C7;
+    --husai-bg-danger: #FEE2E2;
+    --husai-bg-peach: #FFE4D6;
+
+    /* Text Colors */
+    --husai-text-primary: #1F2937;
+    --husai-text-secondary: #4B5563;
+    --husai-text-muted: #6B7280;
+    --husai-text-light: #9CA3AF;
+
+    /* Layout */
+    --husai-navbar-height: 72px;
+    --husai-sidebar-width: 240px;
+    --husai-sidebar-collapsed: 70px;
+    --husai-border-radius-sm: 12px;
+    --husai-border-radius: 16px;
+    --husai-border-radius-lg: 24px;
+
+    /* Spacing */
+    --husai-spacing-xs: 0.5rem;   /* 8px */
+    --husai-spacing-sm: 0.75rem;  /* 12px */
+    --husai-spacing-md: 1rem;     /* 16px */
+    --husai-spacing-lg: 1.5rem;   /* 24px */
+    --husai-spacing-xl: 2rem;     /* 32px */
+
+    /* Shadows */
+    --husai-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --husai-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --husai-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --husai-shadow-hover: 0 12px 20px rgba(0, 0, 0, 0.15);
+
+    /* Transitions */
+    --husai-transition-fast: all 0.2s ease;
+    --husai-transition: all 0.3s ease;
+}
+
+/* ==========================================================================
+   Base Styles
+   ========================================================================== */
+body {
+    background-color: var(--husai-bg-primary);
+    color: var(--husai-text-primary);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: var(--husai-spacing-md);
+}
+
+a {
+    color: var(--husai-primary);
+    text-decoration: none;
+    transition: var(--husai-transition-fast);
+}
+
+a:hover {
+    color: var(--husai-accent-purple);
+}
+
+/* ==========================================================================
+   Layout Components
+   ========================================================================== */
+
+/* Navbar */
+.navbar {
+    background: var(--husai-bg-secondary);
+    transition: var(--husai-transition);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--husai-text-primary);
+    transition: var(--husai-transition);
+}
+
+.navbar .container {
+    height: var(--husai-navbar-height);
+    padding-right: 80px;
+}
+
+/* Theme Switch */
+.theme-switch-wrapper {
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+/* Theme Switch Light Mode */
+.theme-switch {
+    position: relative;
+    width: 64px;
+    height: 32px;
+    background: #E2E8F0;  /* Light gray in light mode */
+    border-radius: 32px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: var(--husai-transition);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);  /* Added inner shadow */
+}
+
+.theme-switch::before {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    background: #FBBF24;  /* Sun color */
+    border-radius: 50%;
+    transition: var(--husai-transition);
+    transform: translateX(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  /* Added shadow to circle */
+}
+
+/* Theme Switch Dark Mode */
+.theme-switch.dark {
+    background: #4B5563;  /* Changed to a lighter gray for visibility */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);  /* Darker inner shadow */
+}
+
+.theme-switch.dark::before {
+    background: #F3F4F6;  /* Lighter color for moon */
+    transform: translateX(32px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);  /* Enhanced shadow in dark mode */
+}
+
+/* Hover States */
+.theme-switch:hover {
+    background: #CBD5E1;  /* Lighter on hover in light mode */
+}
+
+.theme-switch.dark:hover {
+    background: #6B7280;  /* Lighter on hover in dark mode */
+}
+
+.theme-switch:hover::before {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Enhanced shadow on hover */
+}
+
+/* Buttons */
+.husai-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--husai-border-radius);
+    font-weight: 600;
+    transition: var(--husai-transition);
+    cursor: pointer;
+    border: none;
+    gap: 0.5rem;
+}
+
+.husai-btn i {
+    font-size: 1rem;
+}
+
+.husai-btn-primary {
+    background: var(--husai-gradient-primary);
+    color: white;
+}
+
+.husai-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(73, 100, 245, 0.3);
+}
+
+.husai-btn-outline {
+    background: transparent;
+    border: 2px solid var(--husai-primary);
+    color: var(--husai-primary);
+}
+
+.husai-btn-outline:hover {
+    background: var(--husai-primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.husai-btn-success {
+    background: var(--husai-gradient-success);
+    color: white;
+}
+
+.husai-btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 211, 153, 0.3);
+}
+
+/* Forms */
+.husai-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--husai-border);
+    border-radius: var(--husai-border-radius);
+    transition: var(--husai-transition);
+    font-size: 1rem;
+    background: var(--husai-bg-secondary);
+}
+
+.husai-input:focus {
+    outline: none;
+    border-color: var(--husai-primary);
+    box-shadow: 0 0 0 3px rgba(73, 100, 245, 0.1);
+}
+
+/* Cards */
+.husai-card {
+    background: var(--husai-bg-secondary);
+    border-radius: var(--husai-border-radius-lg);
+    border: none;
+    padding: var(--husai-spacing-lg);
+    margin-bottom: var(--husai-spacing-lg);
+    transition: var(--husai-transition);
+    box-shadow: var(--husai-shadow);
+    position: relative;
+    overflow: hidden;
+}
+
+.husai-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--husai-shadow-hover);
+}
+
+/* ==========================================================================
+   Dark Mode Styles
+   ========================================================================== */
+[data-theme="dark"] {
+    /* Base Colors */
+    --husai-bg-primary: #111827;
+    --husai-bg-secondary: #1F2937;
+    --husai-text-primary: #F9FAFB;
+    --husai-text-secondary: #E5E7EB;
+    --husai-text-muted: #9CA3AF;
+    --husai-border: #374151;
+}
+
+/* Navbar Dark Mode */
+[data-theme="dark"] .navbar {
+    background: #1E1B4B;
+}
+
+[data-theme="dark"] .navbar-brand {
+    color: white;
+}
+
+[data-theme="dark"] .navbar-light .navbar-nav .nav-link {
+    color: var(--husai-text-secondary);
+}
+
+[data-theme="dark"] .navbar .husai-btn-outline {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+[data-theme="dark"] .navbar .husai-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Components Dark Mode */
+[data-theme="dark"] .husai-card {
+    background: var(--husai-bg-secondary);
+}
+
+[data-theme="dark"] .husai-btn-outline {
+    border-color: var(--husai-text-secondary);
+    color: var(--husai-text-secondary);
+}
+
+[data-theme="dark"] .husai-input {
+    background: var(--husai-bg-secondary);
+    border-color: var(--husai-border);
+    color: var(--husai-text-primary);
+}
+
+[data-theme="dark"] .husai-input::placeholder {
+    color: var(--husai-text-muted);
+}
+
+/* ==========================================================================
+   Custom Scrollbar
+   ========================================================================== */
+/* For Webkit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border: 4px solid #ffffff;
+    border-radius: 100px;
+    min-height: 40px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+}
+
+/* For Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #CBD5E1 #ffffff;
+}
+
+/* Dark mode scrollbar */
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #4B5563;
+    border-color: #1E1B4B;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: #6B7280;
+}
+
+[data-theme="dark"] * {
+    scrollbar-color: #4B5563 #1E1B4B;
+}
+
+/* Hide scrollbar for mobile devices while keeping functionality */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-width: 2px;
+    }
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 0 var(--husai-spacing-md);
+    }
+}
+
+@media (max-width: 768px) {
+    .husai-btn {
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-buttons {
+        gap: 0.75rem;
+    }
+
+    .theme-switch {
+        width: 56px;
+    }
+
+    .theme-switch.dark::before {
+        transform: translateX(24px);
+    }
+}
+
+@media (max-width: 576px) {
+    .theme-switch {
+        width: 48px;
+        height: 28px;
+    }
+    
+    .theme-switch::before {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .theme-switch.dark::before {
+        transform: translateX(20px);
+    }
+
+    .navbar {
+        padding: 0 var(--husai-spacing-sm);
+    }
+
+    .navbar .container {
+        padding-right: 60px; /* Smaller padding for mobile */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Hero Section */
+    .hero-section {
+        padding: 3rem 0;
+        text-align: center;
+    }
+
+    .hero-title {
+        font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .hero-buttons .husai-btn {
+        width: 100%;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1.5rem;
+        margin-top: 2rem;
+    }
+
+    .stat-item {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Feature Cards */
+    .feature-card {
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    /* Trust Section */
+    .trust-section .col-md-4 {
+        padding: 1.5rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        padding: 3rem 0;
+    }
+
+    .cta-section h2 {
+        font-size: 1.75rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 2rem 0;
+    }
+
+    .footer-brand {
+        text-align: center;
+    }
+
+    .social-links {
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .footer h5 {
+        margin-top: 1.5rem;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 576px) {
+    .hero-section {
+        padding: 2rem 0;
+    }
+
+    .hero-title {
+        font-size: 1.5rem;
+    }
+
+    .stats-section {
+        padding: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .stat-content h4 {
+        font-size: 1.25rem;
+    }
+}

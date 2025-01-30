@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System 1</title>
+    <link rel="stylesheet" href="https://unpkg.com/@sakun/system.css">
+    <style>
+        .menu-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 8px;
+            background: white;
+            border-bottom: 1px solid black;
+        }
+        .menu-left {
+            display: flex;
+            gap: 16px;
+        }
+        .menu-item {
+            cursor: pointer;
+        }
+        body {
+            background: white;
+            margin: 0;
+            padding: 8px;
+        }
+        .desktop {
+            position: relative;
+            min-height: calc(100vh - 20px);
+        }
+        .window {
+            position: absolute;
+            display: none;
+        }
+        .window.active {
+            z-index: 100;
+        }
+        .icon {
+            text-align: center;
+            margin: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="menu-bar">
+        <ul role="menu-bar">
+            <li role="menu-item" tabindex="0" aria-haspopup="true">
+              File
+              <ul role="menu">
+                <li role="menu-item"><a href="#menu">Action</a></li>
+                <li role="menu-item"><a href="#menu">Another Action</a></li>
+                <li role="menu-item" class="divider"><a href="#menu">Something else here</a></li>
+                <li role="menu-item"><a href="https://twitter.com/sakofchit">sakun's twitter</a></li>
+              </ul>
+            </li>
+            <li role="menu-item" tabindex="0" aria-haspopup="true">
+              Edit
+              <ul role="menu">
+                <li role="menu-item"><a href="#menu">Action</a></li>
+                <li role="menu-item"><a href="#menu">Another Action</a></li>
+                <li role="menu-item" class="divider"><a href="#menu">Something else here</a></li>
+                <li role="menu-item"><a href="https://sakun.co">sakun's projects</a></li>
+              </ul>
+            </li>
+            <li role="menu-item" tabindex="0" aria-haspopup="true">
+              View
+              <ul role="menu">
+                <li role="menu-item"><a href="#menu">Action</a></li>
+                <li role="menu-item"><a href="#menu">Another Action</a></li>
+                <li role="menu-item"><a href="#menu">Something else here</a></li>
+              </ul>
+            </li>
+            <li role="menu-item" tabindex="0" aria-haspopup="true">
+              Special
+              <ul role="menu">
+                <li role="menu-item"><a href="#menu">You</a></li>
+                <li role="menu-item"><a href="#menu">Get the</a></li>
+                <li role="menu-item"><a href="#menu">Idea</a></li>
+              </ul>
+            </li>
+          </ul>
+
+    </div>
+
+    <div class="desktop" id="desktop">
+        <!-- Desktop Icons -->
+        <div style="display: flex; flex-direction: column; align-items: flex-start;">
+            <div class="icon" onclick="openWindow('trash')">
+                🗑️<br>
+                Trash
+            </div>
+            <div class="icon" onclick="openWindow('disk')">
+                💾<br>
+                Macintosh HD
+            </div>
+        </div>
+
+        <!-- Trash Window -->
+        <div id="trash" class="window" style="top: 50px; left: 50px;">
+            <div class="title-bar">
+                <button aria-label="Close" class="close" onclick="closeWindow('trash')"></button>
+                <h1 class="title">Trash</h1>
+                <button aria-label="Resize" class="resize"></button>
+            </div>
+            <div class="details-bar">
+                <span>0 items</span>
+                <span>0 KB disk space</span>
+            </div>
+            <div class="window-pane">
+                <p>The Trash is empty</p>
+            </div>
+        </div>
+
+        <!-- Disk Window -->
+        <div id="disk" class="window" style="top: 70px; left: 100px;">
+            <div class="title-bar">
+                <button aria-label="Close" class="close" onclick="closeWindow('disk')"></button>
+                <h1 class="title">Macintosh HD</h1>
+                <button aria-label="Resize" class="resize"></button>
+            </div>
+            <div class="details-bar">
+                <span>4 items</span>
+                <span>400 KB available</span>
+            </div>
+            <div class="window-pane">
+                <ul class="tree-view">
+                    <li>System Folder</li>
+                    <li>Empty Folder</li>
+                    <li>MacWrite</li>
+                    <li>MacPaint</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- About Window -->
+        <div id="about" class="window" style="top: 90px; left: 150px;">
+            <div class="title-bar">
+                <button aria-label="Close" class="close" onclick="closeWindow('about')"></button>
+                <h1 class="title">About This Macintosh</h1>
+                <button aria-label="Resize" class="resize"></button>
+            </div>
+            <div class="details-bar">
+                <span>System Information</span>
+            </div>
+            <div class="window-pane" style="text-align: center;">
+                <p>Macintosh System 1.0</p>
+                <p>128K RAM</p>
+                <button onclick="closeWindow('about')">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let activeWindow = null;
+        let windows = {};
+        let isDragging = false;
+        let offset = { x: 0, y: 0 };
+
+        // Initialize windows
+        document.querySelectorAll('.window').forEach(win => {
+            const id = win.id;
+            windows[id] = {
+                element: win,
+                isOpen: false
+            };
+
+            // Make window draggable
+            const titleBar = win.querySelector('.title-bar');
+            titleBar.addEventListener('mousedown', (e) => {
+                if (e.target.tagName.toLowerCase() === 'button') {
+                    return;
+                }
+                isDragging = true;
+                activeWindow = win;
+                setActiveWindow(id);
+                
+                const rect = win.getBoundingClientRect();
+                offset.x = e.clientX - rect.left;
+                offset.y = e.clientY - rect.top;
+            });
+        });
+
+        // Handle dragging
+        document.addEventListener('mousemove', (e) => {
+            if (isDragging && activeWindow) {
+                const desktop = document.getElementById('desktop');
+                const desktopRect = desktop.getBoundingClientRect();
+                
+                let newX = e.clientX - offset.x;
+                let newY = e.clientY - offset.y;
+                
+                newX = Math.max(0, Math.min(newX, desktopRect.width - activeWindow.offsetWidth));
+                newY = Math.max(0, Math.min(newY, desktopRect.height - activeWindow.offsetHeight));
+                
+                activeWindow.style.left = newX + 'px';
+                activeWindow.style.top = newY + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        function openWindow(id) {
+            const win = windows[id];
+            if (!win.isOpen) {
+                win.element.style.display = 'block';
+                win.isOpen = true;
+            }
+            setActiveWindow(id);
+        }
+
+        function closeWindow(id) {
+            const win = windows[id];
+            win.element.style.display = 'none';
+            win.isOpen = false;
+        }
+
+        function setActiveWindow(id) {
+            document.querySelectorAll('.window').forEach(w => w.classList.remove('active'));
+            const win = windows[id];
+            win.element.classList.add('active');
+            win.element.style.zIndex = getTopZIndex() + 1;
+        }
+
+        function getTopZIndex() {
+            let maxZ = 0;
+            document.querySelectorAll('.window').forEach(w => {
+                const z = parseInt(window.getComputedStyle(w).zIndex) || 0;
+                maxZ = Math.max(maxZ, z);
+            });
+            return maxZ;
+        }
+
+        // Open About window on start
+        openWindow('about');
+    </script>
+</body>
+</html>
