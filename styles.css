@@ -38,7 +38,7 @@
 }
 
 .profile-image-wrapper {
-    transform: rotate(-6deg);
+    transform: rotate(-3deg);
 }
 
 .about-content {
@@ -73,7 +73,7 @@
 
 .about-text {
     margin-top: 24px;
-    line-height: 1.8;
+    line-height: 2.5;
     color: rgb(209, 213, 219);
 }
 
