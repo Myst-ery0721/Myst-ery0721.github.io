@@ -142,10 +142,10 @@ function initHeroGrid() {
     // Manually chosen images (NO auto-generation)
     const heroImages = [
         { src: 'img/hero1.gif', title: 'Concept 1' },
-        { src: 'img/DIGITAL.ARTIST/2.jpg', title: 'Concept 2' },
+        { src: 'img/hero3.gif', title: 'Concept 2' },
         { src: 'img/DIGITAL.ARTIST/3.jpg', title: 'Concept 3' },
-        { src: 'img/DIGITAL.ARTIST/4.jpg', title: 'Concept 4' },
-        { src: 'img/DIGITAL.ARTIST/5.jpg', title: 'Concept 5' },
+        { src: 'img/hero4.gif', title: 'Concept 4' },
+        { src: 'img/hero2.gif', title: 'Concept 5' },
     ];
 
     heroImages.forEach(art => {
