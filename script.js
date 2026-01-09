@@ -117,21 +117,50 @@ function initMobileMenu() {
     });
 }
 
-// Initialize hero grid
+// Initialize hero grid (ORIGINAL PIONG VERSION)
+// function initHeroGrid() {
+//     const heroGrid = document.getElementById('hero-grid');
+//     if (heroGrid) {
+//         conceptArt.slice(0, 5).forEach(art =>
+//              {
+//             const div = document.createElement('div');
+//             div.className = 'relative overflow-hidden';
+//             div.innerHTML = `
+//                 <img src="${art.src}" alt="${art.title}" class="w-full h-full object-cover">
+//                 <div class="absolute inset-0 bg-black/98"></div>  // Changed from 95 to 98
+//             `;
+//             heroGrid.appendChild(div);
+//         });
+//     }
+// }
+
+// Initialize hero grid (MODIFIED)
 function initHeroGrid() {
     const heroGrid = document.getElementById('hero-grid');
-    if (heroGrid) {
-        conceptArt.slice(0, 5).forEach(art => {
-            const div = document.createElement('div');
-            div.className = 'relative overflow-hidden';
-            div.innerHTML = `
-                <img src="${art.src}" alt="${art.title}" class="w-full h-full object-cover">
-                <div class="absolute inset-0 bg-black/98"></div>  // Changed from 95 to 98
-            `;
-            heroGrid.appendChild(div);
-        });
-    }
+    if (!heroGrid) return;
+
+    // Manually chosen images (NO auto-generation)
+    const heroImages = [
+        { src: 'img/DIGITAL.ARTIST/1.jpg', title: 'Concept 1' },
+        { src: 'img/DIGITAL.ARTIST/2.jpg', title: 'Concept 2' },
+        { src: 'img/DIGITAL.ARTIST/3.jpg', title: 'Concept 3' },
+        { src: 'img/DIGITAL.ARTIST/4.jpg', title: 'Concept 4' },
+        { src: 'img/DIGITAL.ARTIST/5.jpg', title: 'Concept 5' },
+    ];
+
+    heroImages.forEach(art => {
+        const div = document.createElement('div');
+        div.className = 'relative overflow-hidden';
+
+        div.innerHTML = `
+            <img src="${art.src}" alt="${art.title}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/98"></div>
+        `;
+
+        heroGrid.appendChild(div);
+    });
 }
+
 
 // Initialize concept grid
 function initConceptGrid() {
