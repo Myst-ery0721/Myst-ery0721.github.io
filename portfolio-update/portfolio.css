@@ -1,0 +1,746 @@
+/* =====================================================================
+   PORTFOLIO PANELS
+   Styles for the Illustration, Game Dev and 3D panels and the pop-up.
+   Written as plain CSS (not Tailwind classes) because the Tailwind file
+   this site loads is version 2, which does not support classes like
+   aspect-[16/9] or bg-black/50.
+   ===================================================================== */
+
+:root {
+    --pf-red: #991b1b;
+    --pf-red-bright: #dc2626;
+    --pf-surface: #111827;
+    --pf-surface-2: #1f2937;
+    --pf-text: #f9fafb;
+    --pf-text-muted: #9ca3af;
+    --pf-line: rgba(255, 255, 255, 0.08);
+    --pf-heading-font: 'Playfair Display', Georgia, 'Times New Roman', serif;
+}
+
+.pf-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.pf-section-heading {
+    font-family: var(--pf-heading-font);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-weight: 400;
+    color: var(--pf-text);
+    margin: 0 0 0.5rem;
+}
+
+.pf-section-intro {
+    color: var(--pf-text-muted);
+    margin: 0 0 1.75rem;
+    max-width: 60ch;
+}
+
+
+/* ---------------------------------------------------------------------
+   Tile shape switch (Illustration panel)
+   --------------------------------------------------------------------- */
+.pf-toggle {
+    display: flex;
+    width: fit-content;
+    gap: 0.25rem;
+    padding: 0.25rem;
+    margin: 0 auto 1.75rem;
+    border: 1px solid var(--pf-line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.pf-toggle button {
+    padding: 0.45rem 1rem;
+    border-radius: 999px;
+    color: var(--pf-text-muted);
+    font-size: 0.875rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.pf-toggle button:hover {
+    color: var(--pf-text);
+}
+
+.pf-toggle button[aria-pressed="true"] {
+    background: var(--pf-red);
+    color: #fff;
+}
+
+
+/* ---------------------------------------------------------------------
+   Card grid
+   --------------------------------------------------------------------- */
+.pf-card-grid {
+    display: grid;
+    gap: 1.25rem;
+    padding: 0.75rem; /* room for the hover "pop" so it isn't clipped */
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.pf-grid-landscape {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.pf-grid-3d {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 1100px) {
+    .pf-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pf-grid-landscape,
+    .pf-grid-3d { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 700px) {
+    .pf-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+    .pf-grid-landscape { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+/* ---------------------------------------------------------------------
+   Card (tile)
+   --------------------------------------------------------------------- */
+.pf-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    text-align: left;
+    border-radius: 0.5rem;
+    background: var(--pf-surface);
+    box-shadow: 0 0 0 1px var(--pf-line);
+    transition: transform 0.35s cubic-bezier(.2, .8, .2, 1),
+                box-shadow 0.35s ease,
+                filter 0.35s ease;
+    cursor: pointer;
+}
+
+.pf-card__media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: inherit;
+}
+
+.pf-ratio-portrait  .pf-card__media { aspect-ratio: 3 / 4; }
+.pf-ratio-landscape .pf-card__media { aspect-ratio: 16 / 9; }
+.pf-ratio-square    .pf-card__media { aspect-ratio: 1 / 1; }
+
+.pf-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Darkened edges + a darker bottom so the title stands out */
+.pf-card__vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at center, transparent 45%, rgba(0, 0, 0, 0.7) 100%),
+        linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.35) 30%, transparent 55%);
+    transition: opacity 0.35s ease;
+}
+
+.pf-card__text {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem 1rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.pf-card__title {
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.3;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.pf-card__subtitle {
+    color: #d1d5db;
+    font-size: 0.8rem;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+/* Hover / keyboard focus: the tile lifts, grows and gets a red glow */
+.pf-card:hover,
+.pf-card:focus-visible {
+    z-index: 2;
+    transform: translateY(-6px) scale(1.05);
+    box-shadow:
+        0 0 0 2px var(--pf-red-bright),
+        0 0 28px 2px rgba(220, 38, 38, 0.45),
+        0 22px 40px -12px rgba(0, 0, 0, 0.9);
+    outline: none;
+}
+
+.pf-card:hover .pf-card__img,
+.pf-card:focus-visible .pf-card__img {
+    transform: scale(1.06);
+}
+
+/* The other tiles dim a little so the hovered one looks "chosen" */
+@media (hover: hover) {
+    .pf-card-grid:hover .pf-card:not(:hover) {
+        filter: brightness(0.6) saturate(0.8);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .pf-card,
+    .pf-card__img { transition: none; }
+    .pf-card:hover,
+    .pf-card:focus-visible { transform: none; }
+    .pf-card:hover .pf-card__img { transform: none; }
+}
+
+
+/* ---------------------------------------------------------------------
+   Missing image box
+   --------------------------------------------------------------------- */
+.pf-missing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    width: 100%;
+    height: 100%;
+    min-height: 120px;
+    padding: 1rem;
+    text-align: center;
+    background:
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.025) 0 10px, transparent 10px 20px),
+        var(--pf-surface);
+    color: var(--pf-text-muted);
+    font-size: 0.8rem;
+}
+
+.pf-missing code {
+    color: #fca5a5;
+    font-size: 0.72rem;
+    word-break: break-all;
+}
+
+.pf-card__media .pf-missing { position: absolute; inset: 0; padding-bottom: 3.5rem; }
+
+
+/* ---------------------------------------------------------------------
+   Tags and buttons (used in the player and the pop-up)
+   --------------------------------------------------------------------- */
+.pf-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.pf-tags:empty { display: none; }
+
+.pf-tags li {
+    padding: 0.2rem 0.65rem;
+    border: 1px solid rgba(220, 38, 38, 0.45);
+    border-radius: 999px;
+    color: #fecaca;
+    font-size: 0.78rem;
+}
+
+.pf-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.25rem;
+}
+
+.pf-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.375rem;
+    background: var(--pf-red);
+    color: #fff;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.pf-button:hover,
+.pf-button:focus-visible {
+    background: #b91c1c;
+}
+
+
+/* ---------------------------------------------------------------------
+   GAME DEV: player + list
+   --------------------------------------------------------------------- */
+.pf-games-top {
+    display: grid;
+    grid-template-columns: minmax(0, 2.3fr) minmax(260px, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.pf-player__stage {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--pf-line);
+}
+
+.pf-player__stage:focus-visible {
+    outline: 2px solid var(--pf-red-bright);
+    outline-offset: 3px;
+}
+
+.pf-player__media,
+.pf-player__media > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.pf-player__media img,
+.pf-player__media video {
+    object-fit: contain;
+    background: #000;
+}
+
+.pf-player__media iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.pf-player__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.pf-player__arrow:hover,
+.pf-player__arrow:focus-visible { background: var(--pf-red); }
+.pf-player__arrow--prev { left: 1rem; }
+.pf-player__arrow--next { right: 1rem; }
+.pf-player__arrow[hidden] { display: none; }
+
+.pf-player__count {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.pf-player__media-caption {
+    min-height: 1.25rem;
+    margin: 0.6rem 0 0;
+    color: var(--pf-text-muted);
+    font-size: 0.85rem;
+}
+
+.pf-player__info {
+    margin-top: 0.75rem;
+}
+
+.pf-player__title {
+    font-family: var(--pf-heading-font);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 400;
+    color: var(--pf-text);
+    line-height: 1.2;
+}
+
+.pf-player__summary {
+    margin-top: 1rem;
+    max-width: 70ch;
+    color: #d1d5db;
+    line-height: 1.75;
+}
+
+/* Right column: the list stretches to the player's height and scrolls */
+.pf-games-list-wrap {
+    position: relative;
+    min-height: 320px;
+}
+
+.pf-games-list-label {
+    margin: 0 0 0.75rem;
+    color: var(--pf-text-muted);
+    font-size: 0.85rem;
+}
+
+.pf-game-list {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-right: 0.25rem;
+}
+
+.pf-list-item {
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr);
+    gap: 0.75rem;
+    align-items: center;
+    width: 100%;
+    padding: 0.4rem;
+    text-align: left;
+    border-radius: 0.5rem;
+    border-left: 3px solid transparent;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.pf-list-item:hover,
+.pf-list-item:focus-visible {
+    background: rgba(255, 255, 255, 0.05);
+    outline: none;
+}
+
+.pf-list-item.is-active {
+    background: rgba(153, 27, 27, 0.18);
+    border-left-color: var(--pf-red-bright);
+}
+
+.pf-list-item__thumb {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 0.35rem;
+    background: var(--pf-surface);
+}
+
+.pf-list-item__thumb > * {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pf-list-item__thumb .pf-missing { min-height: 0; padding: 0.25rem; font-size: 0.65rem; }
+.pf-list-item__thumb .pf-missing code { display: none; }
+
+.pf-list-item__text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.pf-list-item__title {
+    color: var(--pf-text);
+    font-size: 0.95rem;
+    line-height: 1.3;
+}
+
+.pf-list-item__meta {
+    color: var(--pf-text-muted);
+    font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+    .pf-games-top { grid-template-columns: minmax(0, 1fr); }
+    .pf-games-list-wrap { min-height: 0; }
+    .pf-game-list { position: static; overflow: visible; }
+}
+
+
+/* ---------------------------------------------------------------------
+   3D ARTIST: viewer + gallery
+   --------------------------------------------------------------------- */
+.pf-3d-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.pf-featured {
+    position: sticky;
+    top: 5.5rem;
+}
+
+.pf-featured #model-container {
+    height: min(75vh, 720px);
+    min-height: 420px;
+}
+
+.pf-featured__caption {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.pf-featured__title {
+    font-family: var(--pf-heading-font);
+    font-size: 1.35rem;
+    color: var(--pf-text);
+}
+
+.pf-featured__hint {
+    color: var(--pf-text-muted);
+    font-size: 0.85rem;
+    align-self: center;
+}
+
+.pf-3d-layout .pf-card-grid { padding-top: 0; }
+
+@media (max-width: 900px) {
+    .pf-3d-layout { grid-template-columns: minmax(0, 1fr); }
+    .pf-featured { position: static; }
+    .pf-featured #model-container { height: 60vh; min-height: 320px; }
+}
+
+
+/* ---------------------------------------------------------------------
+   Detail pop-up
+   --------------------------------------------------------------------- */
+.pf-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.pf-modal[hidden] { display: none; }
+
+.pf-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+}
+
+.pf-modal__panel {
+    position: relative;
+    width: 100%;
+    max-width: 960px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: #0b0b0c;
+    border: 1px solid rgba(153, 27, 27, 0.5);
+    border-radius: 0.75rem;
+    box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.9), 0 0 40px -10px rgba(153, 27, 27, 0.35);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+    transition: opacity 0.25s ease, transform 0.3s cubic-bezier(.2, .8, .2, 1);
+}
+
+.pf-modal.is-open .pf-modal__backdrop { opacity: 1; }
+.pf-modal.is-open .pf-modal__panel { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .pf-modal__panel, .pf-modal__backdrop { transition: none; }
+}
+
+.pf-modal__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 3;
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.pf-modal__close:hover,
+.pf-modal__close:focus-visible { background: var(--pf-red); outline: none; }
+
+.pf-modal__scroll {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.pf-detail__cover {
+    position: relative;
+    background: #000;
+}
+
+/* Artwork: show the whole image */
+.pf-fit-contain img,
+.pf-fit-contain .pf-missing {
+    display: block;
+    width: 100%;
+    max-height: 72vh;
+    object-fit: contain;
+}
+
+/* Games: a wide banner */
+.pf-fit-cover {
+    aspect-ratio: 16 / 9;
+    max-height: 60vh;
+    width: 100%;
+}
+
+.pf-fit-cover img,
+.pf-fit-cover .pf-missing {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pf-fit-cover::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #0b0b0c 0%, transparent 35%);
+    pointer-events: none;
+}
+
+.pf-detail__body {
+    padding: 1.75rem clamp(1.25rem, 4vw, 3rem) 3rem;
+}
+
+.pf-detail__title {
+    font-family: var(--pf-heading-font);
+    font-size: clamp(1.75rem, 4vw, 2.6rem);
+    font-weight: 400;
+    line-height: 1.15;
+    color: var(--pf-text);
+}
+
+.pf-detail__caption {
+    margin-top: 0.6rem;
+    color: #d1d5db;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 65ch;
+}
+
+.pf-block {
+    margin-top: 2.25rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--pf-line);
+}
+
+.pf-block + .pf-block--image,
+.pf-block + .pf-block--video,
+.pf-block + .pf-block--youtube {
+    border-top: 0;
+    padding-top: 0;
+    margin-top: 1.5rem;
+}
+
+.pf-block__heading {
+    margin-bottom: 0.9rem;
+    font-family: var(--pf-heading-font);
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--pf-text);
+}
+
+.pf-block p {
+    max-width: 70ch;
+    color: #d1d5db;
+    line-height: 1.85;
+}
+
+.pf-block p + p { margin-top: 1rem; }
+
+.pf-block ul {
+    max-width: 70ch;
+    padding-left: 1.2rem;
+    list-style: disc;
+    color: #d1d5db;
+    line-height: 1.8;
+}
+
+.pf-block ul li::marker { color: var(--pf-red-bright); }
+
+.pf-block__figure {
+    margin: 0;
+}
+
+.pf-block__figure img,
+.pf-block__figure video,
+.pf-block__figure .pf-missing {
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    background: #000;
+}
+
+.pf-block__figure figcaption {
+    margin-top: 0.5rem;
+    color: var(--pf-text-muted);
+    font-size: 0.85rem;
+}
+
+.pf-block__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.pf-block__gallery img,
+.pf-block__gallery .pf-missing {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+}
+
+.pf-embed {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: #000;
+}
+
+.pf-embed iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+@media (max-width: 640px) {
+    .pf-modal { padding: 0; }
+    .pf-modal__panel { max-height: 100%; height: 100%; border-radius: 0; border: 0; }
+}
