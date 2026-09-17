@@ -148,7 +148,7 @@ export const illustrations = [
 export const referenceSheets = [
     {
         title: 'RefSheet : Chibis',
-        src: 'img/DIGITAL.ARTIST/wowoshi.png',
+        src: 'img/DIGITAL.ARTIST/Wowoshi.png',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
         processImages: [
             { src: 'img/DIGITAL.ARTIST/Alien.png', caption: 'Initial Sketch' },
