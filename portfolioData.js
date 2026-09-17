@@ -39,13 +39,16 @@ export const illustrations = [
     // The extra slides reuse other artworks as stand-ins. Replace them
     // with your real process images, e.g. 'img/DIGITAL.ARTIST/process/callisto-sketch.jpg'
     {
-        title: "'Prince Callisto' -- The Blood Knight",
-        src: 'img/DIGITAL.ARTIST/1.jpg',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.\n\nDuis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.',
+        title: "Bust Commission: Samurai Guy",
+        src: 'img/DIGITAL.ARTIST/Comms (1).jpg',
+        description: 'A commission piece for a client. The process images show the steps I took to create the final artwork, from initial sketches to placing values and polishing the final image.\n\nI used Clip Studio Paint for this piece, focusing on character design and composition.',
         processImages: [
-            { src: 'img/DIGITAL.ARTIST/2.jpg', caption: 'Sketch (stand-in image)' },
-            { src: 'img/DIGITAL.ARTIST/3.jpg', caption: 'Line art (stand-in image)' },
-            { src: 'img/DIGITAL.ARTIST/4.jpg', caption: 'Flat colors (stand-in image)' },
+            { src: 'img/DIGITAL.ARTIST/Comms (2).jpg', caption: 'Sketch' },
+            { src: 'img/DIGITAL.ARTIST/Comms (3).jpg', caption: 'Sketch' },
+            { src: 'img/DIGITAL.ARTIST/Comms (4).jpg', caption: 'Placing Values' },
+            { src: 'img/DIGITAL.ARTIST/Comms (5).jpg', caption: 'Placing Values' },
+            { src: 'img/DIGITAL.ARTIST/Comms (6).jpg', caption: 'Polishing' },
+            { src: 'img/DIGITAL.ARTIST/Comms (7).jpg', caption: 'Reference Image' },
         ],
         tags: ['Clip Studio Paint', 'Character Design'],
         focus: 'top',
@@ -53,11 +56,22 @@ export const illustrations = [
 
     // EXAMPLE: 2 slides and one paragraph
     {
-        title: 'Tamed by an Angel',
-        src: 'img/DIGITAL.ARTIST/2.jpg',
+        title: 'DITYS Entry: Old Lady',
+        src: 'img/DIGITAL.ARTIST/DITYS (1).jpg',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio, praesent libero, sed cursus ante dapibus diam.',
         processImages: [
-            { src: 'img/DIGITAL.ARTIST/5.jpg', caption: 'Rough sketch (stand-in image)' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (3).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (4).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (5).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (6).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (7).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (8).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (9).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (10).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (11).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (12).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (13).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/DITYS (14).jpg', caption: 'Initial Sketch' },
         ],
         tags: ['Adobe Photoshop'],
     },

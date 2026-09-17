@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="portfolio.css?v=5"> <!-- [ADDED] styles for the new panels. Raise the number after ?v= whenever you change this file, so browsers load the new version -->
+    <link rel="stylesheet" href="portfolio.css?v=9"> <!-- [ADDED] styles for the new panels. Raise the number after ?v= whenever you change this file, so browsers load the new version -->
   <!-- Remove previous Three.js scripts and add these in the head section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -67,9 +67,22 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative h-screen">
+        <!-- [COMMENTED OUT] Original hero grid (images added by initHeroGrid() in script.js).
+             To bring it back: remove the comment markers around this div,
+             and un-comment initHeroGrid(); in script.js.
         <div class="absolute inset-0 grid grid-cols-5 opacity-20" id="hero-grid">
-            <!-- Grid images will be inserted here by JavaScript -->
+            Grid images will be inserted here by JavaScript
         </div>
+        -->
+
+        <!-- [ADDED] Landscape background video
+             Put your video at img/hero.mp4 (or change the path below).
+             It must stay "muted" for autoplay to work in browsers. -->
+        <video class="pf-hero-bg" autoplay muted loop playsinline preload="auto" aria-hidden="true">
+            <source src="img/PortfolioBG.mp4" type="video/mp4">
+        </video>
+        <div class="pf-hero-bg-dim"></div> <!-- darkens the video so the logo stands out -->
+
         <!-- Add this new overlay div -->
         <div class="absolute inset-0 bg-black/80 z-[5]"></div>
         <div class="absolute inset-0 flex flex-col items-center justify-center z-10">

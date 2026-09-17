@@ -186,6 +186,7 @@ function initMobileMenu() {
 // }
 
 // Initialize hero grid (MODIFIED)
+// [NOT CALLED] The hero now uses a background video. Kept so you can switch back.
 function initHeroGrid() {
     const heroGrid = document.getElementById('hero-grid');
     if (!heroGrid) return;
@@ -327,7 +328,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Initialize basic features
         initMobileMenu();
         initPortfolioTabs();
-        initHeroGrid();
+        // initHeroGrid();        // [COMMENTED OUT] hero grid replaced by a background video in index.html
         // initConceptGrid();        // [REPLACED] by initIllustrationPanel() below
         initLightbox();
         // renderGameThumbnails();   // [REPLACED] by initGamePanel() below

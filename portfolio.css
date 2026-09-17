@@ -736,3 +736,45 @@
     .pf-modal { padding: 0; }
     .pf-modal__panel { height: 100%; border-radius: 0; border: 0; }
 }
+
+
+/* ---------------------------------------------------------------------
+   HERO: landscape background video (replaces the hero grid)
+   --------------------------------------------------------------------- */
+:root {
+    --pf-nav-height: 72px;          /* height of the top nav bar on phones */
+    --pf-hero-dim: 0.55;            /* 0 = no darkening, 1 = fully black */
+    --pf-hero-focus: center top;    /* keeps the TOP of the video visible if it has to crop */
+    --pf-hero-fade: 15%;            /* how much of the bottom fades to black (was 30%) */
+}
+
+@media (min-width: 768px) {
+    :root { --pf-nav-height: 88px; } /* height of the nav bar on bigger screens */
+}
+
+/* The video starts just below the nav bar, so the nav doesn't cover it */
+.pf-hero-bg,
+.pf-hero-bg-dim {
+    position: absolute;
+    top: var(--pf-nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.pf-hero-bg {
+    z-index: 0;
+    width: 100%;
+    height: calc(100% - var(--pf-nav-height));
+    object-fit: cover;
+    object-position: var(--pf-hero-focus);
+    background: #000;
+}
+
+.pf-hero-bg-dim {
+    z-index: 1;
+    background:
+        linear-gradient(to top, #000 0%, transparent var(--pf-hero-fade)),
+        rgba(0, 0, 0, var(--pf-hero-dim));
+}
