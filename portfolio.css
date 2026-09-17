@@ -53,12 +53,12 @@
     display: grid;
     gap: 1.25rem;
     padding: 0.75rem; /* room for the hover "pop" so it isn't clipped */
-    grid-template-columns: repeat(auto-fill, var(--pf-tile));
+    grid-template-columns: repeat(auto-fit, var(--pf-tile)); /* auto-fit centers rows that aren't full */
     justify-content: center;
 }
 
 .pf-grid-landscape {
-    grid-template-columns: repeat(auto-fill, var(--pf-tile-wide));
+    grid-template-columns: repeat(auto-fit, var(--pf-tile-wide));
 }
 
 @media (max-width: 640px) {
@@ -777,4 +777,61 @@
     background:
         linear-gradient(to top, #000 0%, transparent var(--pf-hero-fade)),
         rgba(0, 0, 0, var(--pf-hero-dim));
+}
+
+
+/* ---------------------------------------------------------------------
+   ILLUSTRATION: Reference Sheets section heading
+   --------------------------------------------------------------------- */
+.pf-subsection-heading {
+    margin-top: 4rem;
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+
+
+/* ---------------------------------------------------------------------
+   GAME DEV pop-up: preview slideshow on top + contributions gallery
+   --------------------------------------------------------------------- */
+.pf-slideshow--popup .pf-slideshow__stage {
+    max-height: var(--pf-popup-media);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.pf-slideshow--popup .pf-slideshow__footer {
+    margin: 0;
+    padding: 0.75rem clamp(1.25rem, 4vw, 3rem) 0;
+}
+
+.pf-detail__subheading {
+    margin: 2rem 0 0;
+    font-family: var(--pf-heading-font);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--pf-text);
+}
+
+.pf-gallery-section .pf-gallery {
+    margin-top: 1rem;
+}
+
+
+/* Keep 16:9 slideshows full width and centered, even when the screen is
+   short. (aspect-ratio + max-height would shrink the frame to the left.) */
+@supports (height: 1cqw) {
+    .pf-slideshow--wide {
+        container-type: inline-size;
+    }
+
+    .pf-slideshow--wide .pf-slideshow__stage {
+        aspect-ratio: auto;
+        width: 100%;
+        max-height: none;
+        height: min(62vh, 56.25cqw);          /* 56.25% of the width = 16:9 */
+    }
+
+    .pf-slideshow--popup .pf-slideshow__stage {
+        height: min(var(--pf-popup-media), 56.25cqw);
+    }
 }

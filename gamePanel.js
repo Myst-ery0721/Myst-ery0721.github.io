@@ -1,12 +1,13 @@
 // =====================================================================
 //  GAME DEV PANEL
-//  Part 1: slideshow + full description (left), list of games (right)
-//  Part 2: gallery of all games, click for a pop-up that autoplays
-//          the game's video
+//  Part 1: SOLO PROJECTS ("games" list)
+//          slideshow + full description (left), list of games (right)
+//  Part 2: CONTRIBUTIONS ("gameContributions" list)
+//          gallery, click for a pop-up that autoplays the game's video
 // =====================================================================
-import { games } from './portfolioData.js';
+import { games, gameContributions } from './portfolioData.js';
 import {
-    createImage, createMedia, createCard, createSlideshow,
+    createImage, createCard, createSlideshow,
     createTags, createParagraphs, createGallery, openDetails,
 } from './components.js';
 
@@ -14,12 +15,21 @@ export function initGamePanel() {
     const player = document.getElementById('game-player');
     const list = document.getElementById('game-list');
     const gallery = document.getElementById('game-gallery');
-    if (!player || !list || !gallery || !games.length) return;
 
-    buildPlayer(player);
-    buildList(list);
-    buildGallery(gallery);
-    showGame(0);
+    // Part 1: solo projects
+    if (player && list && games.length) {
+        buildPlayer(player);
+        buildList(list);
+        showGame(0);
+    }
+
+    // Part 2: contributions (hide the whole section if the list is empty)
+    const section = document.getElementById('game-contributions-section');
+    if (gallery && gameContributions && gameContributions.length) {
+        buildGallery(gallery);
+    } else if (section) {
+        section.hidden = true;
+    }
 }
 
 function gameTags(game) {
@@ -99,12 +109,12 @@ function buildList(list) {
 
 
 // ---------------------------------------------------------------------
-//  Part 2: gallery of games + pop-up
+//  Part 2: contributions gallery + pop-up
 // ---------------------------------------------------------------------
 function buildGallery(gallery) {
     gallery.innerHTML = '';
     gallery.className = 'pf-card-grid pf-grid-landscape';
-    games.forEach(game => {
+    gameContributions.forEach(game => {
         gallery.appendChild(createCard({
             image: game.thumbnail,
             title: game.title,
@@ -115,26 +125,30 @@ function buildGallery(gallery) {
     });
 }
 
+// Pop-up:
+//   top    = slideshow of "media" (video first, then screenshots), with arrows
+//   below  = title, tags, "My Contributions" gallery, description
+// The thumbnail is only used for the tile. If a game has no media yet,
+// the thumbnail fills in so the pop-up isn't empty.
 function openGameDetails(game) {
-    const media = game.media || [];
-    const firstVideo = media.find(m => m.type === 'video' || m.type === 'youtube');
+    const media = (game.media && game.media.length)
+        ? game.media
+        : [{ type: 'image', src: game.thumbnail, caption: '' }];
 
-    // Top: the first video autoplays; without a video, show the thumbnail
-    const hero = document.createElement('div');
-    if (firstVideo) {
-        hero.className = 'pf-hero pf-hero--video';
-        hero.appendChild(createMedia(firstVideo, { autoplay: true }));
-    } else {
-        hero.className = 'pf-hero pf-hero--cover';
-        hero.appendChild(createImage(game.thumbnail, game.title));
-    }
+    const show = createSlideshow(media, {
+        shape: 'wide',
+        label: `${game.title} preview`,
+        autoplayVideos: true,
+    });
+    show.element.classList.add('pf-slideshow--popup');
 
     openDetails({
-        hero,
+        hero: show.element,
+        onArrowKey: show.step,
         title: game.title,
         parts: [
             createTags(gameTags(game)),
-            createGallery(media.filter(m => m !== firstVideo)),
+            createGallery(game.contributionImages, 'My Contributions'),
             createParagraphs(game.description),
         ],
     });

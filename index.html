@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="portfolio.css?v=9"> <!-- [ADDED] styles for the new panels. Raise the number after ?v= whenever you change this file, so browsers load the new version -->
+    <link rel="stylesheet" href="portfolio.css?v=12"> <!-- [ADDED] styles for the new panels. Raise the number after ?v= whenever you change this file, so browsers load the new version -->
   <!-- Remove previous Three.js scripts and add these in the head section -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -172,23 +172,26 @@
 
             <!-- ==========================================================
                  Game Development Tab
-                 Filled by gamePanel.js using the "games" list in portfolioData.js
+                 Filled by gamePanel.js using the "games" (solo projects) and
+                 "gameContributions" lists in portfolioData.js
                  ========================================================== -->
             <div class="tab-content hidden" id="game-content">
                 <div class="pf-wrap">
-                    <!-- Part 1: slideshow (left) + game list (right) -->
+                    <!-- Part 1: solo projects, slideshow (left) + game list (right) -->
                     <div class="pf-games-top">
                         <div id="game-player" class="pf-player"></div>
-                        <aside class="pf-games-list-wrap" aria-label="Games">
-                            <p class="pf-games-list-label">Games</p>
+                        <aside class="pf-games-list-wrap" aria-label="Solo projects">
+                            <p class="pf-games-list-label">Solo Projects</p>
                             <div id="game-list" class="pf-game-list"></div>
                         </aside>
                     </div>
 
-                    <!-- Part 2: gallery of all games (click for details) -->
-                    <h3 class="pf-section-heading">Game gallery</h3>
-                    <p class="pf-section-intro">Select a game to see my contributions, screenshots and videos.</p>
-                    <div id="game-gallery"></div>
+                    <!-- Part 2: contributions gallery (click for details) -->
+                    <div id="game-contributions-section">
+                        <h3 class="pf-section-heading">Contributions</h3>
+                        <p class="pf-section-intro">Games I worked on with other teams. Select one to see my contributions, screenshots and videos.</p>
+                        <div id="game-gallery"></div>
+                    </div>
                 </div>
             </div>
 

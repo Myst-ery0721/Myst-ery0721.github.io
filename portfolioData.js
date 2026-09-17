@@ -73,55 +73,111 @@ export const illustrations = [
             { src: 'img/DIGITAL.ARTIST/DITYS (13).jpg', caption: 'Initial Sketch' },
             { src: 'img/DIGITAL.ARTIST/DITYS (14).jpg', caption: 'Initial Sketch' },
         ],
-        tags: ['Adobe Photoshop'],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
     },
 
     // EXAMPLE: 1 slide (no process images) with text.
     // With only one image, the arrows and dots hide automatically.
     {
-        title: 'Arione',
-        src: 'img/DIGITAL.ARTIST/3.jpg',
+        title: 'Senku Fanart',
+        src: 'img/DIGITAL.ARTIST/senku.png',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
-        processImages: [],
-        tags: [],
+        processImages: [
+            { src: 'img/DIGITAL.ARTIST/senkuVid.mp4', caption: 'Initial Sketch', type: 'video' },
+        ],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
     },
 
-    // The rest: fill in description and processImages when you're ready
-    { title: 'King of the Cursed Kingdom', src: 'img/DIGITAL.ARTIST/4.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', processImages: [] },
-    { title: 'Death is Fun', src: 'img/DIGITAL.ARTIST/5.jpg', description: '', processImages: [] },
-    { title: "'Skye Faust' -- Living Paradox", src: 'img/DIGITAL.ARTIST/6.webp', description: '', processImages: [] },
-    { title: 'DTIYS Artwork', src: 'img/DIGITAL.ARTIST/7.webp', description: '', processImages: [] },
-    { title: 'Hunter Grounds -- Splash Screen', src: 'img/DIGITAL.ARTIST/SplashScreen.jpg', description: '', processImages: [] },
-    { title: "'Bound to Hell' -- Persona Artwork", src: 'img/DIGITAL.ARTIST/erystle.jpg', description: '', processImages: [] },
-    { title: 'Aliester the Danger!', src: 'img/DIGITAL.ARTIST/Aliester.jpg', description: '', processImages: [] },
-    { title: 'Side by Side', src: 'img/DIGITAL.ARTIST/sideside.png', description: '', processImages: [] },
-    { title: 'Vash the Stampede -- FanArt', src: 'img/DIGITAL.ARTIST/vashu2.png', description: '', processImages: [] },
+    {
+        title: 'Queen Bee',
+        src: 'img/DIGITAL.ARTIST/QBee.jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
+        processImages: [
+            { src: 'img/DIGITAL.ARTIST/QBee.mp4', caption: 'Initial Sketch', type: 'video' },
+        ],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
+    },
+    
+    {
+        title: 'Arione - Persona',
+        src: 'img/DIGITAL.ARTIST/Arione (1).jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
+        processImages: [
+            { src: 'img/DIGITAL.ARTIST/Arione (2).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/Arione (1).mp4', caption: 'Initial Sketch', type: 'video' },
+        ],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
+    },
+
+    {
+        title: 'OC Skye Faust',
+        src: 'img/DIGITAL.ARTIST/Skye (1).jpg',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
+        processImages: [
+            { src: 'img/DIGITAL.ARTIST/Skye (2).jpg', caption: 'Initial Sketch' },
+            { src: 'img/DIGITAL.ARTIST/Skye (1).mp4', caption: 'Initial Sketch', type: 'video' },
+        ],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
+    },
+    {
+        title: 'GameShowcase Prints',
+        src: 'img/DIGITAL.ARTIST/GameShowcase(1).png',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
+        processImages: [
+        ],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
+    },
+    {
+        title: 'GameShowcase Prints (2)',
+        src: 'img/DIGITAL.ARTIST/GameShowcase.png',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
+        processImages: [],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
+    },
+
+];
+
+
+// ---------------------------------------------------------------------
+//  REFERENCE SHEETS (Illustration panel, below the 3:4 artworks)
+//  Same fields as illustrations above, and the same pop-up.
+//  The only difference: these tiles are landscape (16:9), so wide
+//  reference sheets aren't cropped into a tall 3:4 shape.
+//  focus = (optional) which part stays visible in the tile, e.g. 'center', 'top'
+// ---------------------------------------------------------------------
+export const referenceSheets = [
+    {
+        title: 'RefSheet : Chibis',
+        src: 'img/DIGITAL.ARTIST/wowoshi.png',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quis sem at nibh elementum imperdiet.',
+        processImages: [
+            { src: 'img/DIGITAL.ARTIST/Alien.png', caption: 'Initial Sketch' },
+        ],
+        tags: ['Clip Studio Paint', 'Digital Painting'],
+    },
+    
     { title: 'Persona Reference Sheet', src: 'img/DIGITAL.ARTIST/refsheet.png', description: '', processImages: [] },
 ];
 
 
 // ---------------------------------------------------------------------
-//  GAME DEV PANEL
+//  GAME DEV PANEL: SOLO PROJECTS (top part)
+//  Shown in the slideshow (left) and the list of games (right).
 //  Each game is one "folder". Tip: keep each game's files in its own
 //  folder, e.g. img/GAMES/my-game/thumb.png
 //
-//  thumbnail   = cover image (right-side list and bottom gallery)
+//  thumbnail   = cover image (right-side list)
 //  description = what the game is + what you did, in one paragraph.
-//                Shown under the slideshow and in the pop-up.
+//                Shown under the slideshow.
 //  media       = slideshow items, in order. Types:
 //                  { type: 'image',   src: '...', caption: '' }
 //                  { type: 'video',   src: '...mp4', caption: '' }
 //                  { type: 'youtube', id: 'VIDEO_ID', caption: '' }
-//
-//  In the pop-up (bottom gallery), the FIRST video in media plays
-//  automatically at the top (muted, visitors can unmute). Everything
-//  else in media is shown in a gallery above the description.
-//  If a game has no video, the thumbnail is shown at the top instead.
 // ---------------------------------------------------------------------
 export const games = [
     {
         title: 'Game Title 1',
-        thumbnail: 'img/GAMES/game1/thumb.png',
+        thumbnail: 'img/GameDev/circus.png',
         role: '3D Artist',
         year: '2025',
         tools: ['Unity', 'Blender', 'Substance Painter'],
@@ -154,6 +210,59 @@ export const games = [
         media: [
             { type: 'image', src: 'img/GAMES/game3/shot1.png', caption: '' },
         ],
+    },
+];
+
+
+// ---------------------------------------------------------------------
+//  GAME DEV PANEL: CONTRIBUTIONS (bottom gallery)
+//  Games you worked on with others.
+//
+//  thumbnail          = the tile image ONLY (not used in the pop-up)
+//  media              = the big preview at the top of the pop-up, with
+//                       arrows. Put the video first, then screenshots.
+//                       Videos play automatically (muted).
+//                         { type: 'video',   src: '...mp4', caption: '' }
+//                         { type: 'youtube', id: 'VIDEO_ID', caption: '' }
+//                         { type: 'image',   src: '...png', caption: '' }
+//  contributionImages = the "My Contributions" gallery below the title:
+//                       your models, textures, concept art for that game
+//                         { src: '...png', caption: 'Character model' }
+//  description        = paragraph under the gallery
+//
+//  If this list is empty, the whole Contributions section hides.
+// ---------------------------------------------------------------------
+export const gameContributions = [
+    {
+        title: 'GAME JAM INDIE CRITICAL: THE CIRCUS',
+        thumbnail: 'img/GameDev/circusThumbnail.png',
+        role: 'Environment Artist',
+        year: '2025',
+        tools: ['Unity', 'Blender'],
+        media: [
+            // { type: 'video', src: 'img/GAMES/contribution1/trailer.mp4', caption: 'Gameplay trailer' },
+            { type: 'video', src: 'img/GameDev/circus.mp4', caption: 'Screenshot' },
+            { type: 'image', src: 'img/GAMES/contribution1/shot2.png', caption: 'Screenshot' },
+        ],
+        contributionImages: [
+            { src: 'img/GAMES/contribution1/my-model1.png', caption: 'Character model' },
+            { src: 'img/GAMES/contribution1/my-model2.png', caption: 'Environment props' },
+        ],
+        description: 'What the game is, the team or studio you worked with, and exactly what you contributed.',
+    },
+    {
+        title: 'Contribution Title 2',
+        thumbnail: 'img/GAMES/contribution2/thumb.png',
+        role: 'Prop Artist',
+        year: '2024',
+        tools: ['Blender', 'Substance Painter'],
+        media: [
+            { type: 'image', src: 'img/GAMES/contribution2/shot1.png', caption: '' },
+        ],
+        contributionImages: [
+            { src: 'img/GAMES/contribution2/my-model1.png', caption: '' },
+        ],
+        description: 'Describe the game and your part in it.',
     },
 ];
 

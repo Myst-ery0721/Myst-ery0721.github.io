@@ -10,7 +10,7 @@
 // =====================================================================
 
 // Shows in the browser Console (F12) so you can check which version loaded
-export const PORTFOLIO_VERSION = 5;
+export const PORTFOLIO_VERSION = 6;
 console.info(`Portfolio panels version ${PORTFOLIO_VERSION} loaded`);
 
 
@@ -112,7 +112,8 @@ export function createCard({ image, title, subtitle = '', ratio = 'portrait', fo
 //         'tall' (tall frame that fits portrait artwork)
 //  Returns { element, step, show }
 // ---------------------------------------------------------------------
-export function createSlideshow(slides, { shape = 'wide', label = 'Slideshow' } = {}) {
+// autoplayVideos: true = video slides start playing (muted) when shown
+export function createSlideshow(slides, { shape = 'wide', label = 'Slideshow', autoplayVideos = false } = {}) {
     const total = slides.length;
     let index = 0;
 
@@ -158,7 +159,7 @@ export function createSlideshow(slides, { shape = 'wide', label = 'Slideshow' } 
 
         // Replacing the element also stops a video that was playing
         holder.innerHTML = '';
-        holder.appendChild(createMedia(slides[index]));
+        holder.appendChild(createMedia(slides[index], { autoplay: autoplayVideos }));
 
         count.textContent = `${index + 1} / ${total}`;
         caption.textContent = slides[index].caption || '';
@@ -222,10 +223,19 @@ export function createParagraphs(text, className = 'pf-detail__text') {
     return wrap;
 }
 
-export function createGallery(items) {
+export function createGallery(items, heading = '') {
     if (!items || !items.length) return null;
+    const wrap = document.createElement('section');
+    wrap.className = 'pf-gallery-section';
+    if (heading) {
+        const h = document.createElement('h4');
+        h.className = 'pf-detail__subheading';
+        h.textContent = heading;
+        wrap.appendChild(h);
+    }
     const grid = document.createElement('div');
     grid.className = 'pf-gallery';
+    wrap.appendChild(grid);
     items.forEach(item => {
         const fig = document.createElement('figure');
         fig.className = `pf-gallery__item pf-gallery__item--${item.type || 'image'}`;
@@ -240,7 +250,7 @@ export function createGallery(items) {
         }
         grid.appendChild(fig);
     });
-    return grid;
+    return wrap;
 }
 
 
